@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
-
-router.get("/", (req, res) => {
-  console.log("hello user");
-  res.send("Hello from users!");
-});
+const UsersController = require("../controllers/UserController");
+const jwtMiddleware = require("../middleware");
+router.get("/getAllUser", jwtMiddleware, UsersController.getUser);
 
 module.exports = router;
