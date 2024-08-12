@@ -21,6 +21,12 @@ module.exports = {
       phone: {
         type: Sequelize.STRING,
       },
+      bom: {
+        type: Sequelize.INTEGER,
+      },
+      ban: {
+        type: Sequelize.BOOLEAN,
+      },
       role: {
         type: Sequelize.STRING,
       },
