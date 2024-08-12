@@ -4,7 +4,7 @@ class CartController {
   async createCart(req, res) {
     const { userId, productId, quantity, total } = req.body;
     try {
-      if ((!userId || !productId, !quantity, !total)) {
+      if ((!userId || !productId, !quantity || !total)) {
         return res.status(500).json("invalid user");
       }
 
