@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import toast from "react-hot-toast";
 import useGet from "~/api/get";
 import usePost from "~/api/post";
@@ -14,7 +15,9 @@ function Test() {
         }
     })
 
-    return (  );
+    return (
+        <></>
+    );
 }
 
 export default Test;
