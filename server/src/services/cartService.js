@@ -1,4 +1,5 @@
 const db = require("../models");
+
 class CartService {
   async createCart({ userId, productId, quantity, total }) {
     try {
@@ -15,12 +16,12 @@ class CartService {
 
       if (!created) {
         cart.quantity += quantity;
-        cart.total = total;
+        cart.total += total;
         await cart.save();
       }
       return { cart };
     } catch (error) {
-      throw error;
+      throw new Error(error.message);
     }
   }
 }
