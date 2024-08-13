@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const ProductsController = require("../controllers/ProductsController");
+const ProductsController = require("../controllers/ProductController");
 const cloudinary = require("../config/cloudinary");
 
 router.post(
