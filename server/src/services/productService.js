@@ -1,12 +1,28 @@
 const db = require("../models");
 class ProductService {
-  async createProduct({ name }, file) {
+  async createProduct(
+    { manufacturerId, name, price, promotion, stock, visible, hot },
+    file
+  ) {
+    console.log(file);
     const [product, created] = await db.Product.findOrCreate({
       where: { name },
-      defaults: { img: file },
+      defaults: {
+        manufacturerId,
+        price,
+        promotion,
+        img: file,
+        stock,
+        visible,
+        hot,
+      },
     });
 
-    return { product, created }; // Optional: return the product and creation status
+    if (!created) {
+      return { error: "Sản phẩm này đã có trong store" };
+    }
+
+    return { product };
   }
 }
 
