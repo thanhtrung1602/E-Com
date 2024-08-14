@@ -25,20 +25,16 @@ class AuthService {
         userId: user.id,
       };
       const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "15m",
+        expiresIn: "30s",
       });
       const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
         expiresIn: "365d",
       });
 
-      const millisecondsInDay = 24 * 60 * 60 * 1000;
-      const millisecondsIn365Days = 365 * millisecondsInDay;
-      const expiresIn = new Date(Date.now() + millisecondsIn365Days).toString();
-
       await db.RefreshToken.create({
         token: refreshToken,
         userId: user.id,
-        expiresIn: expiresIn,
+        expiresIn: "365d",
       });
 
       return { accessToken, refreshToken, users };
@@ -68,6 +64,51 @@ class AuthService {
       }
 
       return register;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async refresh(refreshToken) {
+    try {
+      jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET,
+        (err, user) => {
+          if (err) {
+            return res.status(401).json({ error: "Invalid refresh token" });
+          }
+        }
+      );
+      const tokenRecord = await db.RefreshToken.findOne({
+        where: {
+          token: refreshToken,
+        },
+      });
+
+      const id = tokenRecord?.dataValues.userId;
+
+      if (!tokenRecord) {
+        return { error: "Invalid refresh token." };
+      }
+
+      const expiresIn = tokenRecord?.dataValues.expiresIn;
+      if (expiresIn <= new Date()) {
+        return { error: "Refresh token has expired." };
+      }
+
+      const newPayload = {
+        userId: id,
+      };
+      const newAccessToken = jwt.sign(
+        newPayload,
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+          expiresIn: expiresIn.toString(),
+        }
+      );
+
+      return newAccessToken;
     } catch (error) {
       throw error;
     }

@@ -1,9 +1,9 @@
 const { where } = require("sequelize");
-const users = require("../models/user");
+const db = require("../models");
 class UserService {
   async getUser() {
     try {
-      const getUser = await users.findAll();
+      const getUser = await db.User.findAll();
       return getUser;
     } catch (error) {
       throw error;
