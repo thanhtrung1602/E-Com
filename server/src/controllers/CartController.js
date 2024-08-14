@@ -77,12 +77,14 @@ class CartController {
     }
   }
   // async getCartItemTotal(req, res) {
-  //   const { userId, productId } = req.params;
+  //   const userId = req.params.userId;
+  //   const productId = req.params.productId;
+  
   //   try {
-  //     if (!userId || !productId) {
+  //     if (!userId || !productId) { pull
   //       return res.status(400).json({ error: "User ID and Product ID are required" });
   //     }
-
+  
   //     const total = await cartService.getCartItemTotal(userId, productId);
   //     if (total !== null) {
   //       return res.status(200).json({ userId, productId, total });
