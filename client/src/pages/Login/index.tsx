@@ -8,6 +8,7 @@ import loginImage from "~/assets/loginImage.png";
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const { mutate: login } = usePost();
 
 
@@ -48,10 +49,12 @@ function Login() {
                             <input
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                type="password"
+                                type={showPassword ? "password" : "text"}
                                 placeholder="Password"
                                 className="bg-transparent text-black w-full outline-none border-b-2 pb-1" />
-                            <FaEyeSlash className="absolute right-1 bottom-1 text-[#D1D4DB]" />
+                            <FaEyeSlash
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-1 bottom-1 text-[#D1D4DB] cursor-pointer" />
                         </div>
                         <div className="py-8 flex items-center justify-between">
                             <div className="flex items-center gap-x-2">
