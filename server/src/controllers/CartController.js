@@ -13,6 +13,7 @@ class CartController {
         typeof quantity
       );
       console.log("total>>>>>>>>", total, "quantityCheck>>>>>>>", typeof total);
+
       if (
         !userId ||
         !productId ||
