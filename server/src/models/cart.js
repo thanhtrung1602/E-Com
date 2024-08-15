@@ -28,10 +28,12 @@ module.exports = (sequelize, DataTypes) => {
       userId: DataTypes.STRING,
       quantity: DataTypes.STRING,
       total: DataTypes.STRING,
+      // operation: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: "Cart",
+      tableName: "cart",
     }
   );
   return Cart;
