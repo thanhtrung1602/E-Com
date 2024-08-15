@@ -22,7 +22,6 @@ class AuthController {
 
       const login = await AuthService.login(req.body);
       const { accessToken, refreshToken, users } = login;
-      console.log(login);
       res.cookie("accessToken", accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
@@ -67,6 +66,27 @@ class AuthController {
       }
       const register = await AuthService.register(req.body);
       return res.status(200).json(register);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async refresh(req, res) {
+    try {
+      const { refreshToken } = req.body;
+      const newAccessToken = await AuthService.refresh(refreshToken);
+
+      const millisecondsInDay = 24 * 60 * 60 * 1000;
+      const millisecondsIn365Days = 365 * millisecondsInDay;
+
+      res.cookie("accessToken", newAccessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: millisecondsIn365Days,
+      });
+
+      return res.status(200).json(newAccessToken);
     } catch (error) {
       throw error;
     }
