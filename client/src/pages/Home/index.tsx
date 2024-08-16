@@ -1,7 +1,8 @@
+import getAccessToken from "~/hooks/getAccessToken";
+
 function Home() {
-    return (
-        <div>Đây là home</div>
-    );
+  const { accessToken }: { accessToken: string } = getAccessToken();
+  return <div>Đây là home {accessToken}</div>;
 }
 
 export default Home;

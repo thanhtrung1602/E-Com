@@ -1,5 +1,8 @@
-import axios from "axios";
-import jwt_decode, { jwtDecode } from 'jwt-decode';
+import { config } from "~/config";
+import axios, { InternalAxiosRequestConfig } from "axios";
+import dayjs from "dayjs";
+import jwt_decode, { jwtDecode } from "jwt-decode"; // Sử dụng default import
+import useGet from "~/api/get";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000",
@@ -11,42 +14,36 @@ const instance = axios.create({
 
 instance.interceptors.response.use(
   function (response) {
-    return response.data;
+    return response;
   },
   function (error) {
     return Promise.reject(error);
   }
 );
 
-const checkTokenExpiration = (token: string): Boolean => {
-  const decodedToken: jwt_decode.JwtPayload = jwtDecode(token)
-  const currentTime = Date.now() / 1000;
+const useAxiosWithAuth = () => {
+  const { data: accessToken } = useGet("/auth/getAccessToken");
+  const { data: refreshToken } = useGet("/auth/getRefreshToken");
 
-  if (decodedToken.exp === undefined) {
-    throw new Error("Token does not contain an expiration field.");
-  }
-  return decodedToken?.exp < currentTime;
-};
+  instance.interceptors.request.use(async (config) => {
+    const user: jwt_decode.JwtPayload = jwtDecode(accessToken);
+    const isExpired = dayjs.unix(Number(user)).diff(dayjs()) < 1;
+    console.log("isExpired", isExpired);
+    if (!isExpired) return;
 
-instance.interceptors.request.use(
-  async (config) => {
-    let token = localStorage.getItem('accessToken'); // chỉnh lại cái gán token
-    if (token && checkTokenExpiration(token)) {
-      await autoRefreshToken();
-    }
-    config.headers['Authorization'] = `Bearer ${token}`;
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-)
+    const response = await axios.post(
+      "http://localhost:3000/auth/refresh",
+      {
+        refreshToken: refreshToken,
+      },
+      { withCredentials: true }
+    );
 
-const autoRefreshToken = async () => {
-  const response = await axios.post('http://localhost:3000/auth/refresh', {
-    refreshToken: refreshToken; // get lại cái refresh token gán vào 
+    config.headers.Authorization = `Bearer ${response.data.accessToken}`;
   });
-  return response.data.accessToken;
 };
 
-export default instance;
+export default {
+  instance,
+  useAxiosWithAuth,
+};

@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import instance from "~/services/axios";
+import custom from "~/services/axios";
 
 function useGet(url: string) {
+  const { instance } = custom;
   return useQuery({
     queryKey: [url],
     queryFn: () => instance.get(url).then((response) => response.data),

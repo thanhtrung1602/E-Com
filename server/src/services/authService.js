@@ -4,6 +4,7 @@ dotenv.config();
 const { compare, hash } = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const user = require("../models/user");
+const { where } = require("sequelize");
 class AuthService {
   async login(body) {
     try {
@@ -25,7 +26,7 @@ class AuthService {
         userId: user.id,
       };
       const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "30s",
+        expiresIn: "15s",
       });
       const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
         expiresIn: "365d",
@@ -71,44 +72,80 @@ class AuthService {
 
   async refresh(refreshToken) {
     try {
-      jwt.verify(
-        refreshToken,
-        process.env.REFRESH_TOKEN_SECRET,
-        (err, user) => {
-          if (err) {
-            return res.status(401).json({ error: "Invalid refresh token" });
-          }
-        }
-      );
-      const tokenRecord = await db.RefreshToken.findOne({
-        where: {
-          token: refreshToken,
-        },
-      });
-
-      const id = tokenRecord?.dataValues.userId;
-
-      if (!tokenRecord) {
-        return { error: "Invalid refresh token." };
+      if (!refreshToken) {
+        return { error: "Refresh token is required" };
       }
 
-      const expiresIn = tokenRecord?.dataValues.expiresIn;
-      if (expiresIn <= new Date()) {
-        return { error: "Refresh token has expired." };
+      const decoded = jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET
+      );
+      if (!decoded) {
+        return { error: "Invalid refresh token" };
+      }
+
+      const tokenRecord = await db.RefreshToken.findOne({
+        where: { token: refreshToken },
+      });
+
+      if (!tokenRecord) {
+        return { error: "Refresh token not found" };
+      }
+
+      const expiresIn = tokenRecord.dataValues.expiresIn;
+      if (new Date(expiresIn) <= new Date()) {
+        return { error: "Refresh token has expired" };
       }
 
       const newPayload = {
-        userId: id,
+        userId: tokenRecord.dataValues.userId,
       };
       const newAccessToken = jwt.sign(
         newPayload,
         process.env.ACCESS_TOKEN_SECRET,
         {
-          expiresIn: expiresIn.toString(),
+          expiresIn: expiresIn,
         }
       );
 
       return newAccessToken;
+    } catch (error) {
+      console.error("Error during token refresh:", error);
+      return { error: "Internal server error" };
+    }
+  }
+
+  async changePass({ email, password }) {
+    const saltRounds = 10;
+    const hashPassword = await hash(password, saltRounds);
+    try {
+      const checkUser = await db.User.findOne({
+        where: {
+          email: email,
+        },
+      });
+
+      if (!checkUser) {
+        return {
+          error:
+            "Không tìm thấy người dùng với email này. Vui lòng nhập email khác",
+        };
+      }
+
+      const changePass = await db.User.update(
+        {
+          password: hashPassword,
+        },
+        {
+          where: {
+            email,
+          },
+        }
+      );
+
+      if (changePass) {
+        return { message: "Đổi mật khẩu thành công" };
+      }
     } catch (error) {
       throw error;
     }
