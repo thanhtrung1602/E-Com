@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import usePost from "~/api/post";
-import registerImage from "~/assets/registerImage.png";
+import registerImage from "~/assets/images/registerImage.png";
 
 function Register() {
     const [phone, setPhone] = useState("");

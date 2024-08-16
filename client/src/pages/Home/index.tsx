@@ -1,6 +1,13 @@
+import Banner from "~/layouts/components/Banner";
+import Nav from "~/layouts/components/Nav";
+
 function Home() {
     return (
-        <div>Đây là home</div>
+        <>
+            <Banner />
+            <Nav />
+            <div></div>
+        </>
     );
 }
 

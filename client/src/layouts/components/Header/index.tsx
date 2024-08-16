@@ -2,24 +2,24 @@ import { FaSearch } from "react-icons/fa";
 import { FaArrowRight, FaTicket } from "react-icons/fa6";
 import { MdOutlineShoppingCart, MdPersonOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
-import logo from "~/assets/logo.png";
+import logo from "~/assets/images/logo.png";
 function Header() {
     return (
-        <header className="h-[92px]">
+        <header>
             <div className="bg-main600 flex justify-center items-center">
-                <p className="flex justify-center items-center gap-x-3 py-2 text-white">
+                <div className="flex justify-center items-center gap-x-3 py-2 text-white">
                     <FaTicket />
                     <span>30% off storewide — Limited time! </span>
                     <div className="flex items-center gap-x-2">
                         <Link to={"#"} className="underline">Shop Now</Link>
                         <FaArrowRight />
                     </div>
-                </p>
+                </div>
             </div>
-            <div className="flex items-center justify-around px-32 py-[6px]">
+            <div className="flex items-center justify-between px-36 py-[6px]">
                 <div className="flex items-center">
                     <img src={logo} alt="Logo" className="size-10" />
-                    <h2 className="text-black font-bold">Dream Team</h2>
+                    <h2 className="text-black text-2xl font-bold">Dream Team</h2>
                 </div>
                 <div className="">
                     <ul className="flex items-center gap-x-12">
@@ -35,8 +35,9 @@ function Header() {
                         <FaSearch className="absolute right-3 bottom-3 text-black" />
                     </form>
                     <div className="flex justify-center items-center gap-x-4">
-                        <Link to={"#"}>
+                        <Link to={"#"} className="relative">
                             <MdOutlineShoppingCart className="text-black size-6" />
+                            <span className="absolute -top-3 -right-3 bg-red-500 text-white py-[0.5px] px-2 rounded-full">1</span>
                         </Link>
                         <Link to={"#"}>
                             <MdPersonOutline className="text-black size-6" />

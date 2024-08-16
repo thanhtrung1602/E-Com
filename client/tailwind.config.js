@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -9,8 +10,8 @@ export default {
       backgroundColor: {
         main600: '#1B253C',
         main500: '#202C46',
-      }
+      },    
     },
   },
-  plugins: [],
+  plugins: []
 }

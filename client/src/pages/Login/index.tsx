@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import usePost from "~/api/post";
-import loginImage from "~/assets/loginImage.png";
+import loginImage from "~/assets/images/loginImage.png";
 
 function Login() {
     const [email, setEmail] = useState("");
