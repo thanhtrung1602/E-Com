@@ -44,7 +44,7 @@ instance.interceptors.request.use(
 
 const autoRefreshToken = async () => {
   const response = await axios.post('http://localhost:3000/auth/refresh', {
-    refreshToken: refreshToken; // get lại cái refresh token gán vào 
+    refreshToken: autoRefreshToken // get lại cái refresh token gán vào 
   });
   return response.data.accessToken;
 };
