@@ -29,7 +29,7 @@ function Footer() {
                     </form>
                 </div>
             </div>
-            <div className="w-full px-36 flex justify-center gap-x-7">
+            <div className="w-full px-[135px] flex justify-center gap-x-7">
                 <div className="px-8 py-12 w-[262px]">
                     <CiDeliveryTruck className="size-12" />
                     <p className="text-xl font-medium w-full">Free Shipping</p>
@@ -51,7 +51,7 @@ function Footer() {
                     <span className="text-sm">Phone and Email support</span>
                 </div>
             </div>
-            <div className="bg-main600 px-36 pt-20 pb-8">
+            <div className="bg-main600 px-[135px] pt-20 pb-8">
                 <div className="flex justify-between">
                     <div className="w-[544px] text-white flex flex-col gap-y-8">
                         <h2 className="text-2xl font-semibold">Dream Team</h2>
