@@ -11,7 +11,7 @@ import imageNav6 from "~/assets/images/imageNav6.png";
 function Nav() {
 
     return (
-        <div className="flex justify-between px-36 pt-10">
+        <div className="flex justify-between px-[135px] pt-10">
             <Link to={"/"}>
                 <div className="bg-[#F4F4F6] flex justify-center items-center gap-x-4 px-4 py-1 rounded">
                     <span className="font-semibold">Điện thoại</span>

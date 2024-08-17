@@ -16,7 +16,7 @@ function Header() {
                     </div>
                 </div>
             </div>
-            <div className="flex items-center justify-between px-36 py-[6px]">
+            <div className="flex items-center justify-between px-[135px] py-[6px]">
                 <div className="flex items-center">
                     <img src={logo} alt="Logo" className="size-10" />
                     <h2 className="text-black text-2xl font-bold">Dream Team</h2>

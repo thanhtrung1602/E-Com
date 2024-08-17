@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useRef, useState } from 'react';
 import iphoneBanner from "~/assets/images/iphoneBanner.png"
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+// import required modules
+import { Autoplay, Navigation } from 'swiper/modules';
+import { FaApple, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-// import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { FaApple } from 'react-icons/fa';
 
 const slider = [
     {
@@ -43,6 +43,7 @@ export default function Banner() {
     return (
         <div>
             <Swiper
+                className='relative group'
                 spaceBetween={30}
                 centeredSlides={true}
                 autoplay={{
@@ -52,12 +53,15 @@ export default function Banner() {
                 pagination={{
                     clickable: true,
                 }}
-                navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
+                navigation={{
+                    nextEl: '.button-next-slide',
+                    prevEl: '.button-prev-slide',
+                }}
+                modules={[Autoplay, Navigation]}
             >
                 {slider.map((slide, index) => (
                     <SwiperSlide key={index}>
-                        <div className={`h-100px flex justify-around items-center text-white ${slide.color} select-none px-36 py-12`} >
+                        <div className={`relative h-100px flex justify-around items-center text-white ${slide.color} select-none px-[135px] py-12`} >
                             <div className=''>
                                 <p className='flex items-center gap-x-2 pb-2'>
                                     {slide.icon}
@@ -70,6 +74,12 @@ export default function Banner() {
                         </div>
                     </SwiperSlide>
                 ))}
+                <div className='absolute z-10 top-1/2 -translate-y-1/2 group-hover:left-0 -left-[23rem] button-prev-slide text-black size-10 bg-white grid place-content-center duration-300 rounded-tr-full rounded-br-full'>
+                    <FaArrowLeft />
+                </div>
+                <div className='absolute z-10 top-1/2 -translate-y-1/2 group-hover:right-0 -right-[23rem] button-next-slide text-black size-10 bg-white grid place-content-center duration-300 rounded-tl-full rounded-bl-full'>
+                    <FaArrowRight />
+                </div>
             </Swiper>
         </div >
     );
