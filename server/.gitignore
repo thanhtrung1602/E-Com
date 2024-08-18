@@ -2,7 +2,7 @@
 /dist
 /node_modules
 /build
-
+/src/config.json
 # Logs
 logs
 *.log
@@ -18,7 +18,7 @@ lerna-debug.log*
 # Tests
 /coverage
 /.nyc_output
-config.json
+
 
 # IDEs and editors
 /.idea

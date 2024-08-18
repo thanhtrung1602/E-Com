@@ -4,7 +4,7 @@ class ManufacturerController {
   async getAllManufacturer(req, res) {
     try {
       const getAllManufacturer = await ManufacturerService.getAllManufacturer();
-      return res.status(200), json(getAllManufacturer);
+      return res.status(200).json(getAllManufacturer);
     } catch (error) {
       throw error;
     }
@@ -44,8 +44,11 @@ class ManufacturerController {
         return res.status(401).json({ error: "invalid categoryId or name" });
       }
 
+      const numberCategoryId = parseInt(categoryId);
+
       const createManufacturer = await ManufacturerService.createManufacturer(
-        req.body
+        numberCategoryId,
+        name
       );
 
       return res.status(200).json(createManufacturer);
@@ -61,8 +64,10 @@ class ManufacturerController {
       if (!numberId) {
         return res.status(400).json({ error: "missing id" });
       }
+      const numberCategoryId = parseInt(categoryId);
       const updateManufacturer = await ManufacturerService.updateManufacturer(
-        req.body,
+        numberCategoryId,
+        name,
         id
       );
       return res.status(200).json(updateManufacturer);
@@ -77,7 +82,9 @@ class ManufacturerController {
       if (!numberId) {
         return res.status(400).json({ error: "missing id" });
       }
-      const delManufacturer = await ManufacturerService.delManufacturer(id);
+      const delManufacturer = await ManufacturerService.delManufacturer(
+        numberId
+      );
       return res.status(200).json(delManufacturer);
     } catch (error) {
       throw error;
