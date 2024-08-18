@@ -6,10 +6,13 @@ router.post("/createOrderDetail", OrderDetailController.createOrderDetail);
 
 router.get("/getAllOrderDetails", OrderDetailController.getAllOrderDetails);
 
-router.delete("/deleteOrderDetail/:id", OrderDetailController.deleteOrderDetail);
+// thiếu getAllOrderDetailByOrderId/:id
 
+router.delete(
+  "/deleteOrderDetail/:id",
+  OrderDetailController.deleteOrderDetail
+);
 
 // router.get("/getOrderDetailsByOrderId/:orderId", OrderDetailController.getOrderDetailsByOrderId);
-
 
 module.exports = router;

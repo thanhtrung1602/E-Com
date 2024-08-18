@@ -18,10 +18,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Order.init(
     {
-      userId: DataTypes.STRING,
+      // thiếu total và status(trạng thái đang giao hay sao)
+      userId: DataTypes.INTEGER,
       street: DataTypes.STRING,
       city: DataTypes.STRING,
-      phone: DataTypes.STRING,
+      phone: DataTypes.INTEGER,
     },
     {
       sequelize,

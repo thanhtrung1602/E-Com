@@ -38,14 +38,15 @@ class CartController {
     }
   }
 
-  async getAllCart(req, res) {
-    const { userId } = req.body;
+  async getAllCartByUserId(req, res) {
+    const id = req.params.id;
     try {
-      if (!userId) {
-        return res.status(500).json("Invalid userId");
+      if (!id) {
+        return res.status(500).json("Invalid id");
       }
-      const getAllCart = await cartService.getAllCart(userId);
-      return res.status(200).json(getAllCart);
+      const numberId = parseInt(id);
+      const getAllCartByUserId = await cartService.getAllCartByUserId(numberId);
+      return res.status(200).json(getAllCartByUserId);
     } catch (error) {
       console.error("Error getting cart:", error.message);
       return res
@@ -68,21 +69,15 @@ class CartController {
   //   }
   // }
 
-  async deleteCartItem(req, res) {
-    const { userId, productId } = req.body;
+  async deleteCart(req, res) {
+    const id = req.params.id;
     try {
-      if (!userId || !productId) {
-        return res.status(400).json({ error: "Invalid input" });
+      if (!id) {
+        return res.status(500).json("Invalid id");
       }
-
-      const result = await cartService.deleteCartItem(userId, productId);
-      if (result) {
-        return res
-          .status(200)
-          .json({ message: "Cart item deleted successfully" });
-      } else {
-        return res.status(404).json({ error: "Cart item not found" });
-      }
+      const numberId = parseInt(id);
+      const deleteCart = await cartService.deleteCart(numberId);
+      return res.status(200).json(deleteCart);
     } catch (error) {
       console.error("Error deleting cart item:", error.message);
       return res

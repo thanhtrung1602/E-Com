@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models/index");
 
 class CartService {
   async createCart({ userId, productId, quantity, total }) {
@@ -25,14 +25,14 @@ class CartService {
       throw new Error(error.message);
     }
   }
-  async getAllCart(userId) {
+  async getAllCartByUserId(userId) {
     try {
-      const cart = await db.Cart.findAll({
+      const getAllCartByUserId = await db.Cart.findAll({
         where: {
           userId,
         },
       });
-      return { cart };
+      return getAllCartByUserId;
     } catch (error) {
       console.error("Error in CartService:", error.message);
       throw new Error(error.message);
@@ -64,18 +64,27 @@ class CartService {
   //     throw new Error(error.message);
   //   }
   // }
-  async deleteCartItem(userId, productId) {
+  async deleteCart(id) {
     try {
       const cartItem = await db.Cart.findOne({
-        where: { userId, productId },
+        where: {
+          id,
+        },
       });
 
       if (!cartItem) {
-        return false; // Trả về false nếu không tìm thấy sản phẩm trong giỏ hàng
+        return { error: "hiện tại không có id Trong giỏ hàng" };
       }
 
-      await cartItem.destroy(); // Xóa sản phẩm khỏi giỏ hàng
-      return true; // Trả về true sau khi xóa thành công
+      const deleteCart = await db.Cart.destroy({
+        where: {
+          id,
+        },
+      });
+
+      if (deleteCart) {
+        return { message: "delete successfully!" };
+      }
     } catch (error) {
       console.error("Error in CartService:", error.message);
       throw new Error(error.message);
@@ -91,11 +100,11 @@ class CartService {
   //         attributes: ["price"],
   //       }],
   //     });
-  
+
   //     if (!cartItem) {
   //       return null;
   //     }
-  
+
   //     const total = cartItem.quantity * cartItem.productData.price;
   //     return total;
   //   } catch (error) {
@@ -103,7 +112,6 @@ class CartService {
   //     throw new Error(error.message);
   //   }
   // }
-  
 }
 
 module.exports = new CartService();
