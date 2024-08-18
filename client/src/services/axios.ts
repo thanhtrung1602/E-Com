@@ -1,14 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 // import { jwtDecode } from "jwt-decode"; // Correct import
 // import { getAccessToken, getRefreshToken } from "./tokenService";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000",
-  headers: {
-    "Content-type": "application/json",
-  },
-  withCredentials: true,
+  baseURL: "http://localhost:3000"
 });
 
 instance.interceptors.response.use(
