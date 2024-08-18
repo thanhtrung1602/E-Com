@@ -1,11 +1,10 @@
 const db = require("../models");
-const categories = require("../models/categories");
 
 class CategoriesService {
   async createCategories({ name }) {
     console.log(db.Categories);
     try {
-      const [category, created] = await db.Categories.findOrCreate({
+      const [categories, created] = await db.Categories.findOrCreate({
         where: {
           name,
         },
@@ -17,7 +16,7 @@ class CategoriesService {
       if(!created) {
         return { error: "categories da co trong database" };
       }
-      return category;
+      return categories;
     } catch (error) {
       throw new Error(error.message);
     }
@@ -35,8 +34,8 @@ class CategoriesService {
   }
   async getCategoryById(id) {
     try {
-      const category = await db.Categories.findByPk(id);
-      return category;
+      const categories = await db.Categories.findByPk(id);
+      return categories;
     } catch (error) {
       throw new Error(error.message);
     }
