@@ -25,10 +25,13 @@ module.exports = (sequelize, DataTypes) => {
       userId: DataTypes.INTEGER,
       productId: DataTypes.INTEGER,
       comment: DataTypes.STRING,
+      date: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: "Comment",
+      tableName: "comments",
+
     }
   );
   return Comment;
