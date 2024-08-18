@@ -55,7 +55,7 @@ class ValueAttributeController {
           numberAttributeId,
           numberProductId,
           value,
-          id
+          numberId
         );
       return res.status(200).json(updateValueAttribute);
     } catch (error) {

@@ -54,13 +54,13 @@ class ValueAttributeService {
     try {
       const getOneValueAttributeById = await db.AttributeValue.findOne({
         where: {
-          id: numberId,
+          id: id,
         },
       });
 
       if (!getOneValueAttributeById) {
         return {
-          error: `Không tìm thấy getOneValueAttributeById by id ${numberId}`,
+          error: `Không tìm thấy getOneValueAttributeById by id ${id}`,
         };
       }
 
