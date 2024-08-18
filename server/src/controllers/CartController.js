@@ -4,9 +4,15 @@ class CartController {
   async createCart(req, res) {
     const { userId, productId, quantity, total } = req.body;
     try {
-      console.log("Request Body:", req.body);
-      const parsedQuantity = parseInt(quantity, 10);
-      const parsedTotal = parseFloat(total);
+      console.log("product >>>>", productId);
+      console.log("userId >>>>", userId);
+      console.log(
+        "quatity>>>>>>>>",
+        quantity,
+        "quantityCheck>>>>>>>",
+        typeof quantity
+      );
+      console.log("total>>>>>>>>", total, "quantityCheck>>>>>>>", typeof total);
       if (
         !userId ||
         !productId ||
@@ -26,21 +32,25 @@ class CartController {
       return res.status(200).json(createCart);
     } catch (error) {
       console.error("Error creating cart:", error.message);
-      return res.status(500).json({ error: "An error occurred", details: error.message });
+      return res
+        .status(500)
+        .json({ error: "An error occurred", details: error.message });
     }
   }
 
   async getAllCart(req, res) {
     const { userId } = req.body;
     try {
-      if (!userId) {  
+      if (!userId) {
         return res.status(500).json("Invalid userId");
       }
       const getAllCart = await cartService.getAllCart(userId);
       return res.status(200).json(getAllCart);
     } catch (error) {
       console.error("Error getting cart:", error.message);
-      return res.status(500).json({ error: "An error occurred", details: error.message });
+      return res
+        .status(500)
+        .json({ error: "An error occurred", details: error.message });
     }
   }
   // async updateQuantity(req, res) {
@@ -67,24 +77,28 @@ class CartController {
 
       const result = await cartService.deleteCartItem(userId, productId);
       if (result) {
-        return res.status(200).json({ message: "Cart item deleted successfully" });
+        return res
+          .status(200)
+          .json({ message: "Cart item deleted successfully" });
       } else {
         return res.status(404).json({ error: "Cart item not found" });
       }
     } catch (error) {
       console.error("Error deleting cart item:", error.message);
-      return res.status(500).json({ error: "An error occurred", details: error.message });
+      return res
+        .status(500)
+        .json({ error: "An error occurred", details: error.message });
     }
   }
   // async getCartItemTotal(req, res) {
   //   const userId = req.params.userId;
   //   const productId = req.params.productId;
-  
+
   //   try {
   //     if (!userId || !productId) { pull
   //       return res.status(400).json({ error: "User ID and Product ID are required" });
   //     }
-  
+
   //     const total = await cartService.getCartItemTotal(userId, productId);
   //     if (total !== null) {
   //       return res.status(200).json({ userId, productId, total });
