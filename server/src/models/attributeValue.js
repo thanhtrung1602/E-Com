@@ -13,7 +13,11 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: "id",
         as: "attributeData",
       });
+<<<<<<< HEAD
       AttributeValue.belongsTo(models.Attribute, {
+=======
+      AttributeValue.belongsTo(models.Product, {
+>>>>>>> 35ff99103815c6904dee799e16528bd253b8e9ce
         foreignKey: "productId",
         targetKey: "id",
         as: "productData",
@@ -29,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "AttributeValue",
+<<<<<<< HEAD
+=======
+      tableName: "attributevalue",
+>>>>>>> 35ff99103815c6904dee799e16528bd253b8e9ce
     }
   );
   return AttributeValue;

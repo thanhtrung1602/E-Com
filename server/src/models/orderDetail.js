@@ -23,8 +23,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   OrderDetail.init(
     {
+<<<<<<< HEAD
+      // Đổi lại hết thành INTEGER
       productId: DataTypes.STRING,
       orderId: DataTypes.STRING,
+=======
+      productId: DataTypes.INTEGER,
+      orderId: DataTypes.INTEGER,
+>>>>>>> Trung
       quantity: DataTypes.STRING,
       total: DataTypes.STRING,
     },
