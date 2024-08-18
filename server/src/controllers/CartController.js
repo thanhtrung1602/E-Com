@@ -4,6 +4,10 @@ class CartController {
   async createCart(req, res) {
     const { userId, productId, quantity, total } = req.body;
     try {
+<<<<<<< HEAD
+      if ((!userId || !productId, !quantity || !total)) {
+        return res.status(500).json("invalid user");
+=======
       console.log("product >>>>", productId);
       console.log("userId >>>>", userId);
       console.log(
@@ -22,6 +26,7 @@ class CartController {
         parsedTotal < 0
       ) {
         return res.status(400).json({ error: "Invalid input" });
+>>>>>>> Cuong
       }
       const createCart = await cartService.createCart({
         userId,
