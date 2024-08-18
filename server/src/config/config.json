@@ -2,7 +2,11 @@
   "development": {
     "username": "postgres",
     "password": "123",
+<<<<<<< HEAD
     "database": "mydb",
+=======
+    "database": "ecommerce",
+>>>>>>> Cuong
     "host": "localhost",
     "dialect": "postgres"
   },
