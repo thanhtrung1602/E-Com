@@ -4,135 +4,49 @@ import bannerSale from "~/assets/images/bannerSale.png"
 import bannerProductPopular from "~/assets/images/bannerProductPopular.png"
 import blog from "~/assets/images/blog.png"
 
-//Swiper
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { FaArrowRight } from 'react-icons/fa';
 
-// import required modules
-import { Autoplay, Navigation } from 'swiper/modules';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 import Countdown from "~/components/CountDown";
+import SwiperItem from "~/components/Swiper";
 
-const products = [
-    {
-        percent: "0%",
-        img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-s23-fe.png",
-        name: 'Samsung galaxy zflip5',
-        price: '199.00',
-        promotion: '199.00',
-    },
-    {
-        percent: "0%",
-        img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-a35_8_.png",
-        name: 'Samsung galaxy zflip5',
-        price: '199.00',
-        promotion: '199.00',
-    },
-    {
-        percent: "0%",
-        img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-s24-plus.png",
-        name: 'Samsung galaxy zflip5',
-        price: '199.00',
-        promotion: '199.00',
-    },
-    {
-        percent: "0%",
-        img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/s/ss-s24-ultra-xam-222_2.png",
-        name: 'Samsung galaxy zflip5',
-        price: '199.00',
-        promotion: '199.00',
-    },
-    {
-        percent: "0%",
-        img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-z-flip-6-xanh-duong-6_2.png",
-        name: 'Samsung galaxy zflip5',
-        price: '199.00',
-        promotion: '199.00',
-    },
-    {
-        percent: "0%",
-        img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/e/tecno-pova-6-neo-1.png",
-        name: 'Samsung galaxy zflip5',
-        price: '199.00',
-        promotion: '199.00',
-    },
-    {
-        percent: "0%",
-        img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-15-plus_1_.png",
-        name: 'Samsung galaxy zflip5',
-        price: '199.00',
-        promotion: '199.00',
-    },
-    {
-        percent: "0%",
-        img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook_1__1_8.png",
-        name: 'Samsung galaxy zflip5',
-        price: '199.00',
-        promotion: '199.00',
-    },
-    {
-        percent: "0%",
-        img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook_2__5.png",
-        name: 'Samsung galaxy zflip5',
-        price: '199.00',
-        promotion: '199.00',
-    },
-    {
-        percent: "0%",
-        img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/g/r/group_509_9__1.png",
-        name: 'Samsung galaxy zflip5',
-        price: '199.00',
-        promotion: '199.00',
-    },
-]
+interface Product {
+    percent: string;
+    img: string;
+    name: string;
+    price: string;
+    promotion: string;
+}
 
-const blogs = [
-    {
-        img: blog,
-        name: "iPhone 15 ra mắt bảng Pro Max",
-    },
-    {
-        img: blog,
-        name: "iPhone 15 ra mắt bảng Pro Max",
-    },
-    {
-        img: blog,
-        name: "iPhone 15 ra mắt bảng Pro Max",
-    },
-    {
-        img: blog,
-        name: "iPhone 15 ra mắt bảng Pro Max",
-    },
-    {
-        img: blog,
-        name: "iPhone 15 ra mắt bảng Pro Max",
-    },
-    {
-        img: blog,
-        name: "iPhone 15 ra mắt bảng Pro Max",
-    },
-    {
-        img: blog,
-        name: "iPhone 15 ra mắt bảng Pro Max",
-    },
-    {
-        img: blog,
-        name: "iPhone 15 ra mắt bảng Pro Max",
-    },
-    {
-        img: blog,
-        name: "iPhone 15 ra mắt bảng Pro Max",
-    },
-    {
-        img: blog,
-        name: "iPhone 15 ra mắt bảng Pro Max",
-    },
+interface Blog {
+    img: string;
+    name: string;
+}
 
-]
+const products: Product[] = [
+    { percent: "0%", img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-s23-fe.png", name: 'Samsung galaxy zflip5', price: '199.00', promotion: '199.00' },
+    { percent: "0%", img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-a35_8_.png", name: 'Samsung galaxy zflip5', price: '199.00', promotion: '199.00' },
+    { percent: "0%", img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-s24-plus.png", name: 'Samsung galaxy zflip5', price: '199.00', promotion: '199.00' },
+    { percent: "0%", img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/s/ss-s24-ultra-xam-222_2.png", name: 'Samsung galaxy zflip5', price: '199.00', promotion: '199.00' },
+    { percent: "0%", img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-z-flip-6-xanh-duong-6_2.png", name: 'Samsung galaxy zflip5', price: '199.00', promotion: '199.00' },
+    { percent: "0%", img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/e/tecno-pova-6-neo-1.png", name: 'Samsung galaxy zflip5', price: '199.00', promotion: '199.00' },
+    { percent: "0%", img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-15-plus_1_.png", name: 'Samsung galaxy zflip5', price: '199.00', promotion: '199.00' },
+    { percent: "0%", img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook_1__1_8.png", name: 'Samsung galaxy zflip5', price: '199.00', promotion: '199.00' },
+    { percent: "0%", img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook_2__5.png", name: 'Samsung galaxy zflip5', price: '199.00', promotion: '199.00' },
+    { percent: "0%", img: "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/g/r/group_509_9__1.png", name: 'Samsung galaxy zflip5', price: '199.00', promotion: '199.00' },
+];
+
+const blogs: Blog[] = [
+    { img: blog, name: "iPhone 15 ra mắt bảng Pro Max" },
+    { img: blog, name: "iPhone 15 ra mắt bảng Pro Max" },
+    { img: blog, name: "iPhone 15 ra mắt bảng Pro Max" },
+    { img: blog, name: "iPhone 15 ra mắt bảng Pro Max" },
+    { img: blog, name: "iPhone 15 ra mắt bảng Pro Max" },
+    { img: blog, name: "iPhone 15 ra mắt bảng Pro Max" },
+    { img: blog, name: "iPhone 15 ra mắt bảng Pro Max" },
+    { img: blog, name: "iPhone 15 ra mắt bảng Pro Max" },
+    { img: blog, name: "iPhone 15 ra mắt bảng Pro Max" },
+    { img: blog, name: "iPhone 15 ra mắt bảng Pro Max" },
+];
 
 function Home() {
     const saleEndDate = '2024-08-17T23:59:59';
@@ -147,90 +61,64 @@ function Home() {
                 <h2 className="text-3xl font-semibold pb-[30px]">Sản Phẩm Hot</h2>
                 <div className="flex flex-col gap-y-5 w-full">
                     <div className="flex justify-between">
-                        <Swiper
+                        <SwiperItem<Product>
+                            items={products}
                             className='relative group'
                             slidesPerView={5}
                             spaceBetween={20}
-                            pagination={{
-                                clickable: true,
-                            }}
-                            navigation={{
-                                nextEl: '.button-next-slide',
-                                prevEl: '.button-prev-slide',
-                            }}
-                            modules={[Autoplay, Navigation]}
+                            pagination={true}
+                            navigation={true}
                         >
-                            {products.map((product, index) => (
-                                <SwiperSlide key={index}>
-                                    <div className="relative p-5 rounded bg-[#F4F4F6] overflow-hidden select-none">
-                                        <span className="absolute top-0 left-0 rounded-tr-full px-4 text-white py-1 rounded-br-full bg-[#FF0000]">Giảm {product.percent}</span>
-                                        <div className="w-full mb-5 flex justify-center">
-                                            <img
-                                                src={product.img}
-                                                alt=""
-                                                className="w-full my-0 mx-auto"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-y-3 border-t border-black">
-                                            <p className="font-medium text-base mt-1">{product.name}</p>
-                                            <div className="flex flex-col gap-y-1">
-                                                <span className="font-semibold text-xl text-[#FF0000]">${product.price}</span>
-                                                <span className="font-normal text-sm text-[#6C7275] line-through">${product.promotion}</span>
-                                            </div>
+                            {(product) => (
+                                <div className="relative p-5 rounded bg-[#F4F4F6] overflow-hidden select-none">
+                                    <span className="absolute top-0 left-0 rounded-tr-full px-4 text-white py-1 rounded-br-full bg-[#FF0000]">Giảm {product.percent}</span>
+                                    <div className="w-full mb-5 flex justify-center">
+                                        <img
+                                            src={product.img}
+                                            alt=""
+                                            className="w-full my-0 mx-auto"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-y-3 border-t border-black">
+                                        <p className="font-medium text-base mt-1">{product.name}</p>
+                                        <div className="flex flex-col gap-y-1">
+                                            <span className="font-semibold text-xl text-[#FF0000]">${product.price}</span>
+                                            <span className="font-normal text-sm text-[#6C7275] line-through">${product.promotion}</span>
                                         </div>
                                     </div>
-                                </SwiperSlide>
-                            ))}
-                            <div className='absolute z-10 top-1/2 -translate-y-1/2 group-hover:left-0 -left-[23rem] button-prev-slide text-white size-10 bg-[#9096A2] grid place-content-center duration-300 rounded-tr-full rounded-br-full select-none cursor-pointer'>
-                                <FaArrowLeft />
-                            </div>
-                            <div className='absolute z-10 top-1/2 -translate-y-1/2 group-hover:right-0 -right-[23rem] button-next-slide text-white size-10 bg-[#9096A2] grid place-content-center duration-300 rounded-tl-full rounded-bl-full select-none cursor-pointer'>
-                                <FaArrowRight />
-                            </div>
-                        </Swiper>
+                                </div>
+                            )}
+                        </SwiperItem>
                     </div>
                     <div className="flex justify-between">
-                        <Swiper
+                        <SwiperItem<Product>
+                            items={products}
                             className='relative group'
                             slidesPerView={5}
                             spaceBetween={20}
-                            pagination={{
-                                clickable: true,
-                            }}
-                            navigation={{
-                                nextEl: '.button-next-slide',
-                                prevEl: '.button-prev-slide',
-                            }}
-                            modules={[Autoplay, Navigation]}
+                            pagination={true}
+                            navigation={true}
                         >
-                            {products.map((product, index) => (
-                                <SwiperSlide key={index}>
-                                    <div className="relative p-5 rounded bg-[#F4F4F6] overflow-hidden select-none">
-                                        <span className="absolute top-0 left-0 rounded-tr-full px-4 text-white py-1 rounded-br-full bg-[#FF0000]">Giảm {product.percent}</span>
-                                        <div className="w-full mb-5 flex justify-center">
-                                            <img
-                                                src={product.img}
-                                                alt=""
-                                                className="w-full my-0 mx-auto"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-y-3 border-t border-black">
-                                            <p className="font-medium text-base mt-1">{product.name}</p>
-                                            <div className="flex flex-col gap-y-1">
-                                                <span className="font-semibold text-xl text-[#FF0000]">${product.price}</span>
-                                                <span className="font-normal text-sm text-[#6C7275] line-through">${product.promotion}</span>
-                                            </div>
+                            {(product) => (
+                                <div className="relative p-5 rounded bg-[#F4F4F6] overflow-hidden select-none">
+                                    <span className="absolute top-0 left-0 rounded-tr-full px-4 text-white py-1 rounded-br-full bg-[#FF0000]">Giảm {product.percent}</span>
+                                    <div className="w-full mb-5 flex justify-center">
+                                        <img
+                                            src={product.img}
+                                            alt=""
+                                            className="w-full my-0 mx-auto"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-y-3 border-t border-black">
+                                        <p className="font-medium text-base mt-1">{product.name}</p>
+                                        <div className="flex flex-col gap-y-1">
+                                            <span className="font-semibold text-xl text-[#FF0000]">${product.price}</span>
+                                            <span className="font-normal text-sm text-[#6C7275] line-through">${product.promotion}</span>
                                         </div>
                                     </div>
-                                </SwiperSlide>
-                            ))}
-                            <div className='absolute z-10 top-1/2 -translate-y-1/2 group-hover:left-0 -left-[23rem] button-prev-slide text-white size-10 bg-[#9096A2] grid place-content-center duration-300 rounded-tr-full rounded-br-full select-none cursor-pointer'>
-                                <FaArrowLeft />
-                            </div>
-                            <div className='absolute z-10 top-1/2 -translate-y-1/2 group-hover:right-0 -right-[23rem] button-next-slide text-white size-10 bg-[#9096A2] grid place-content-center duration-300 rounded-tl-full rounded-bl-full select-none cursor-pointer'>
-                                <FaArrowRight />
-                            </div>
-                        </Swiper>
+                                </div>
+                            )}
+                        </SwiperItem>
                     </div>
                 </div>
             </div>
@@ -263,90 +151,64 @@ function Home() {
                     <div className="w-3/5">
                         <div className="flex flex-col gap-y-5 w-full">
                             <div className="flex justify-between">
-                                <Swiper
+                                <SwiperItem<Product>
+                                    items={products}
                                     className='relative group'
                                     slidesPerView={3}
                                     spaceBetween={20}
-                                    pagination={{
-                                        clickable: true,
-                                    }}
-                                    navigation={{
-                                        nextEl: '.button-next-slide',
-                                        prevEl: '.button-prev-slide',
-                                    }}
-                                    modules={[Autoplay, Navigation]}
+                                    pagination={true}
+                                    navigation={true}
                                 >
-                                    {products.map((product, index) => (
-                                        <SwiperSlide key={index}>
-                                            <div className="relative p-5 rounded bg-[#F4F4F6] overflow-hidden select-none">
-                                                <span className="absolute top-0 left-0 rounded-tr-full px-4 text-white py-1 rounded-br-full bg-[#FF0000]">Giảm {product.percent}</span>
-                                                <div className="w-full mb-5 flex justify-center">
-                                                    <img
-                                                        src={product.img}
-                                                        alt=""
-                                                        className="w-full my-0 mx-auto"
-                                                    />
-                                                </div>
-                                                <div className="flex flex-col gap-y-3 border-t border-black">
-                                                    <p className="font-medium text-base mt-1">{product.name}</p>
-                                                    <div className="flex flex-col gap-y-1">
-                                                        <span className="font-semibold text-xl text-[#FF0000]">${product.price}</span>
-                                                        <span className="font-normal text-sm text-[#6C7275] line-through">${product.promotion}</span>
-                                                    </div>
+                                    {(product) => (
+                                        <div className="relative p-5 rounded bg-[#F4F4F6] overflow-hidden select-none">
+                                            <span className="absolute top-0 left-0 rounded-tr-full px-4 text-white py-1 rounded-br-full bg-[#FF0000]">Giảm {product.percent}</span>
+                                            <div className="w-full mb-5 flex justify-center">
+                                                <img
+                                                    src={product.img}
+                                                    alt=""
+                                                    className="w-full my-0 mx-auto"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col gap-y-3 border-t border-black">
+                                                <p className="font-medium text-base mt-1">{product.name}</p>
+                                                <div className="flex flex-col gap-y-1">
+                                                    <span className="font-semibold text-xl text-[#FF0000]">${product.price}</span>
+                                                    <span className="font-normal text-sm text-[#6C7275] line-through">${product.promotion}</span>
                                                 </div>
                                             </div>
-                                        </SwiperSlide>
-                                    ))}
-                                    <div className='absolute z-10 top-1/2 -translate-y-1/2 group-hover:left-0 -left-[23rem] button-prev-slide text-white size-10 bg-[#9096A2] grid place-content-center duration-300 rounded-tr-full rounded-br-full select-none cursor-pointer'>
-                                        <FaArrowLeft />
-                                    </div>
-                                    <div className='absolute z-10 top-1/2 -translate-y-1/2 group-hover:right-0 -right-[23rem] button-next-slide text-white size-10 bg-[#9096A2] grid place-content-center duration-300 rounded-tl-full rounded-bl-full select-none cursor-pointer'>
-                                        <FaArrowRight />
-                                    </div>
-                                </Swiper>
+                                        </div>
+                                    )}
+                                </SwiperItem>
                             </div>
                             <div className="flex justify-between">
-                                <Swiper
+                                <SwiperItem<Product>
+                                    items={products}
                                     className='relative group'
                                     slidesPerView={3}
                                     spaceBetween={20}
-                                    pagination={{
-                                        clickable: true,
-                                    }}
-                                    navigation={{
-                                        nextEl: '.button-next-slide',
-                                        prevEl: '.button-prev-slide',
-                                    }}
-                                    modules={[Autoplay, Navigation]}
+                                    pagination={true}
+                                    navigation={true}
                                 >
-                                    {products.map((product, index) => (
-                                        <SwiperSlide key={index}>
-                                            <div className="relative p-5 rounded bg-[#F4F4F6] overflow-hidden select-none">
-                                                <span className="absolute top-0 left-0 rounded-tr-full px-4 text-white py-1 rounded-br-full bg-[#FF0000]">Giảm {product.percent}</span>
-                                                <div className="w-full mb-5 flex justify-center">
-                                                    <img
-                                                        src={product.img}
-                                                        alt=""
-                                                        className="w-full my-0 mx-auto"
-                                                    />
-                                                </div>
-                                                <div className="flex flex-col gap-y-3 border-t border-black">
-                                                    <p className="font-medium text-base mt-1">{product.name}</p>
-                                                    <div className="flex flex-col gap-y-1">
-                                                        <span className="font-semibold text-xl text-[#FF0000]">${product.price}</span>
-                                                        <span className="font-normal text-sm text-[#6C7275] line-through">${product.promotion}</span>
-                                                    </div>
+                                    {(product) => (
+                                        <div className="relative p-5 rounded bg-[#F4F4F6] overflow-hidden select-none">
+                                            <span className="absolute top-0 left-0 rounded-tr-full px-4 text-white py-1 rounded-br-full bg-[#FF0000]">Giảm {product.percent}</span>
+                                            <div className="w-full mb-5 flex justify-center">
+                                                <img
+                                                    src={product.img}
+                                                    alt=""
+                                                    className="w-full my-0 mx-auto"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col gap-y-3 border-t border-black">
+                                                <p className="font-medium text-base mt-1">{product.name}</p>
+                                                <div className="flex flex-col gap-y-1">
+                                                    <span className="font-semibold text-xl text-[#FF0000]">${product.price}</span>
+                                                    <span className="font-normal text-sm text-[#6C7275] line-through">${product.promotion}</span>
                                                 </div>
                                             </div>
-                                        </SwiperSlide>
-                                    ))}
-                                    <div className='absolute z-10 top-1/2 -translate-y-1/2 group-hover:left-0 -left-[23rem] button-prev-slide text-white size-10 bg-[#9096A2] grid place-content-center duration-300 rounded-tr-full rounded-br-full select-none cursor-pointer'>
-                                        <FaArrowLeft />
-                                    </div>
-                                    <div className='absolute z-10 top-1/2 -translate-y-1/2 group-hover:right-0 -right-[23rem] button-next-slide text-white size-10 bg-[#9096A2] grid place-content-center duration-300 rounded-tl-full rounded-bl-full select-none cursor-pointer'>
-                                        <FaArrowRight />
-                                    </div>
-                                </Swiper>
+                                        </div>
+                                    )}
+                                </SwiperItem>
                             </div>
                         </div>
                     </div>
@@ -360,36 +222,33 @@ function Home() {
                 <h2 className="text-3xl font-semibold pb-[30px]">Blog</h2>
                 <div className="flex flex-col gap-y-5 w-full">
                     <div className="">
-                        <Swiper
+                        <SwiperItem
+                            items={blogs}
                             className='relative group'
                             slidesPerView={3}
                             spaceBetween={20}
-                            pagination={{
-                                clickable: true,
-                            }}
-                            modules={[Autoplay, Navigation]}
+                            navigation={false}
+                            pagination={true}
                         >
-                            {blogs.map((blog, index) => (
-                                <SwiperSlide key={index}>
-                                    <div className="relative rounded overflow-hidden select-none">
-                                        <div className="w-full mb-5 flex justify-center">
-                                            <img
-                                                src={blog.img}
-                                                alt=""
-                                                className="w-full my-0 mx-auto"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-y-3">
-                                            <p className="font-medium text-xl mt-1">{blog.name}</p>
-                                            <button className="underline flex items-center pb-1 text-base font-medium">
-                                                More Blog
-                                                <FaArrowRight className="ml-2" />
-                                            </button>
-                                        </div>
+                            {blog => (
+                                <div className="relative rounded overflow-hidden select-none">
+                                    <div className="w-full mb-5 flex justify-center">
+                                        <img
+                                            src={blog.img}
+                                            alt=""
+                                            className="w-full my-0 mx-auto"
+                                        />
                                     </div>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
+                                    <div className="flex flex-col gap-y-3">
+                                        <p className="font-medium text-xl mt-1">{blog.name}</p>
+                                        <button className="underline flex items-center pb-1 text-base font-medium">
+                                            More Blog
+                                            <FaArrowRight className="ml-2" />
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </SwiperItem>
                     </div>
                 </div>
             </div>
