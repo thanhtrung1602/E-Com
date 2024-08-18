@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       userId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       street: {
         type: Sequelize.STRING,
@@ -19,6 +19,12 @@ module.exports = {
         type: Sequelize.STRING,
       },
       phone: {
+        type: Sequelize.INTEGER,
+      },
+      total: {
+        type: Sequelize.INTEGER,
+      },
+      status: {
         type: Sequelize.STRING,
       },
       createdAt: {

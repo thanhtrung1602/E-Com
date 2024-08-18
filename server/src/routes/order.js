@@ -8,7 +8,7 @@ router.get("/getAllOrder", OrderController.getAllOrder);
 
 router.get("/getOrderById/:id", OrderController.getOrderById);
 
-// thiếu getOrderUserById/:id
+router.get("/getOrderUserById/:id", OrderController.getOrderUserById);
 
 router.put("/updateOrder/:id", OrderController.updateOrder);
 

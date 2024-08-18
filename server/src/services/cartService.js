@@ -38,32 +38,7 @@ class CartService {
       throw new Error(error.message);
     }
   }
-  // async updateQuantity(userId, productId, operation) {
-  //   try {
-  //     const cartItem = await db.Cart.findOne({
-  //       where: { userId, productId },
-  //     });
 
-  //     if (!cartItem) {
-  //       throw new Error("Cart item not found");
-  //     }
-
-  //     if (operation === "increase") {
-  //       cartItem.quantity += 1; // tang so luong len 1
-  //     } else if (operation === "decrease") {
-  //       cartItem.quantity -= 1; // giam so luong xuong 1
-  //       if (cartItem.quantity < 0) {
-  //         cartItem.quantity = 0; // Ko cho so luong am
-  //       }
-  //     }
-
-  //     await cartItem.save();
-  //     return { cartItem };
-  //   } catch (error) {
-  //     console.error("Error in CartService:", error.message);
-  //     throw new Error(error.message);
-  //   }
-  // }
   async deleteCart(id) {
     try {
       const cartItem = await db.Cart.findOne({
@@ -90,28 +65,6 @@ class CartService {
       throw new Error(error.message);
     }
   }
-  // async getCartItemTotal(userId, productId) {
-  //   try {
-  //     const cartItem = await db.Cart.findOne({
-  //       where: { userId, productId },
-  //       include: [{
-  //         model: db.Product,
-  //         as: "productData",
-  //         attributes: ["price"],
-  //       }],
-  //     });
-
-  //     if (!cartItem) {
-  //       return null;
-  //     }
-
-  //     const total = cartItem.quantity * cartItem.productData.price;
-  //     return total;
-  //   } catch (error) {
-  //     console.error("Error in CartService:", error.message);
-  //     throw new Error(error.message);
-  //   }
-  // }
 }
 
 module.exports = new CartService();

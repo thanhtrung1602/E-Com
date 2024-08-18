@@ -29,16 +29,29 @@ class OrderDetailService {
         }
     }
 
+    async getAllOrderDetailByOrderId(orderId) {
+        try {
+          const orderDetails = await db.OrderDetail.findAll({
+            where: { orderId },
+          });
+          return orderDetails;
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      }
+    
+
     async deleteOrderDetail(orderDetailId) {
         try {
-            const deleted = await db.OrderDetail.destroy({
-                where: { id: orderDetailId },
-            });
-            return deleted; // Trả về số lượng khi đã bị xóa
+          const deletedCount = await db.OrderDetail.destroy({
+            where: { id: orderDetailId },
+          });
+          return deletedCount;
         } catch (error) {
-            throw new Error(error.message);
+          throw new Error(error.message);
         }
-    }
+      }
+      
     // async getOrderDetailsByOrderId(orderId) {
     //     try {
     //         const orderDetails = await db.OrderDetail.findAll({

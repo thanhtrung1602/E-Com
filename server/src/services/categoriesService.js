@@ -1,20 +1,15 @@
 const db = require("../models");
 
 class CategoriesService {
-  async createCategories({ name }) {
-    console.log(db.Categories);
+  async createCategories({ name, img }) {
     try {
       const [categories, created] = await db.Categories.findOrCreate({
-        where: {
-          name,
-        },
-        defaults: {
-          name,
-        },
+        where: { name },
+        defaults: { name, img },
       });
 
-      if(!created) {
-        return { error: "categories da co trong database" };
+      if (!created) {
+        return { error: "Category already exists in the database" };
       }
       return categories;
     } catch (error) {
@@ -25,13 +20,12 @@ class CategoriesService {
   async getAllCategories() {
     try {
       const allCategories = await db.Categories.findAll();
-      console.log('All categories:', allCategories);
       return allCategories;
     } catch (error) {
-      console.error('Error in getAllCategories:', error.message);
       throw new Error(error.message);
     }
   }
+
   async getCategoryById(id) {
     try {
       const categories = await db.Categories.findByPk(id);
@@ -40,15 +34,16 @@ class CategoriesService {
       throw new Error(error.message);
     }
   }
-  async updateCategories(id, { name }) {
+
+  async updateCategories(id, { name, img }) {
     try {
-      const [updated] = await db.Categories.update({ name }, {
+      const [updated] = await db.Categories.update({ name, img }, {
         where: { id },
         returning: true,
       });
 
       if (updated === 0) {
-        return null; 
+        return null;
       }
 
       const updatedCategory = await db.Categories.findByPk(id);

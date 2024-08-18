@@ -1,11 +1,11 @@
-const categoriesService = require("../services/CategoriesService");
+const categoriesService = require("../services/categoriesService");
 
 class CategoriesController {
   async createCategories(req, res) {
-    const { name } = req.body;
+    const { name, img } = req.body;
     try {
-      if (!name) {
-        return res.status(400).json("Invalid input: Name is required");
+      if (!name || !img) {
+        return res.status(400).json("Invalid input: Name and img are required");
       }
 
       const createCategories = await categoriesService.createCategories(req.body);
@@ -14,14 +14,16 @@ class CategoriesController {
       return res.status(500).json({ error: "An error occurred", details: error.message });
     }
   }
+
   async getAllCategories(req, res) {
     try {
-      const getAllCategories = await categoriesService.getAllCategories();  
+      const getAllCategories = await categoriesService.getAllCategories();
       return res.status(200).json(getAllCategories);
     } catch (error) {
       return res.status(500).json({ error: "An error occurred", details: error.message });
     }
   }
+
   async getCategoryById(req, res) {
     const { id } = req.params;
     try {
@@ -34,12 +36,13 @@ class CategoriesController {
       return res.status(500).json({ error: "An error occurred", details: error.message });
     }
   }
+
   async updateCategories(req, res) {
     const { id } = req.params;
-    const { name } = req.body;
+    const { name, img } = req.body;
     try {
-      if (!name) {
-        return res.status(400).json("Invalid input: Name is required");
+      if (!name || !img) {
+        return res.status(400).json("Invalid input: Name and img are required");
       }
 
       const updatedCategory = await categoriesService.updateCategories(id, req.body);
@@ -51,6 +54,7 @@ class CategoriesController {
       return res.status(500).json({ error: "An error occurred", details: error.message });
     }
   }
+
   async deleteCategories(req, res) {
     const { id } = req.params;
     try {
@@ -64,4 +68,5 @@ class CategoriesController {
     }
   }
 }
+
 module.exports = new CategoriesController();

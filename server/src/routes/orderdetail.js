@@ -6,7 +6,10 @@ router.post("/createOrderDetail", OrderDetailController.createOrderDetail);
 
 router.get("/getAllOrderDetails", OrderDetailController.getAllOrderDetails);
 
-// thiếu getAllOrderDetailByOrderId/:id
+router.get(
+  "/getAllOrderDetailByOrderId/:id",
+  OrderDetailController.getAllOrderDetailByOrderId
+);
 
 router.delete(
   "/deleteOrderDetail/:id",

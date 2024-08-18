@@ -2,35 +2,28 @@
   "development": {
     "username": "postgres",
     "password": "123",
-<<<<<<< HEAD
-    "database": "mydb",
-=======
+
     "database": "ecommerce",
->>>>>>> Cuong
+
     "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-<<<<<<< HEAD
+
     "password": "123456",
     "database": "E-com_test",
-=======
-    "password": "123",
-    "database": "mydb_test",
->>>>>>> Phu
+
     "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
-<<<<<<< HEAD
+
     "password": "123456",
     "database": "E-com_production",
-=======
-    "password": "123",
-    "database": "mydb_production",
->>>>>>> Phu
+
+
     "host": "localhost",
     "dialect": "postgres"
   }
