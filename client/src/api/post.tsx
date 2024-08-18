@@ -7,8 +7,7 @@ function usePost() {
       instance.post(url, data).then((response) => {
         console.log(response);
         return response;
-      }
-      ),
+      }),
   });
 }
 

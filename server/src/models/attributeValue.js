@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: "id",
         as: "attributeData",
       });
-      AttributeValue.belongsTo(models.Attribute, {
+      AttributeValue.belongsTo(models.Product, {
         foreignKey: "productId",
         targetKey: "id",
         as: "productData",
@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "AttributeValue",
+      tableName: "attributevalue",
     }
   );
   return AttributeValue;

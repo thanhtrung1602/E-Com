@@ -49,6 +49,7 @@ const blogs: Blog[] = [
 ];
 
 function Home() {
+<<<<<<< HEAD
     const saleEndDate = '2024-08-17T23:59:59';
     return (
         <>
@@ -254,6 +255,9 @@ function Home() {
             </div>
         </>
     );
+=======
+  return <div>Đây là home </div>;
+>>>>>>> Trung
 }
 
 export default Home;
