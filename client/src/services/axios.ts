@@ -1,12 +1,10 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/ban-types */
 import axios from "axios";
 import jwt_decode, { jwtDecode } from 'jwt-decode';
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000",
-  headers: {
-    "Content-type": "application/json",
-  },
-  withCredentials: true,
+  baseURL: "http://localhost:3000"
 });
 
 instance.interceptors.response.use(
