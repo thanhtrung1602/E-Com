@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import useGet from "~/api/get";
 import imageNav1 from "~/assets/images/imageNav1.png";
 import imageNav2 from "~/assets/images/imageNav2.png";
 import imageNav3 from "~/assets/images/imageNav3.png";
