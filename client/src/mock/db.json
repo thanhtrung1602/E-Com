@@ -1,0 +1,35 @@
+{
+
+    "categories": [
+        {
+            "id":1,
+            "name": "Điện thoại",
+            "img": "imageNav1"
+        },
+        {
+            "id":2,
+            "name": "Laptop",
+            "img": "imageNav2"
+        },
+        {
+            "id":3,
+            "name": "Tablet",
+            "img": "imageNav3"
+        },
+        {
+            "id":4,
+            "name": "Phụ kiện",
+            "img": "imageNav4"
+        },
+        {
+            "id":5,
+            "name": "Watch",
+            "img": "imageNav5"
+        },
+        {
+            "id":6,
+            "name": "Màn hình",
+            "img": "imageNav6"
+        }
+    ]
+}

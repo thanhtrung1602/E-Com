@@ -17,9 +17,6 @@ const Countdown = ({ targetDate }: { targetDate: string }) => {
             -> +newDate(targetDate) để chuyển chuỗi thời gian thành 1 dãi số diện cho số milliseconds
          */
         const difference = +new Date(targetDate) - +new Date();
-        console.log("Differrence", difference);
-        console.log("Target Date", +new Date(targetDate));
-        console.log("Date", +new Date());
 
         let timeLeft: TimeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
