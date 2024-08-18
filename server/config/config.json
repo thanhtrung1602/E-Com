@@ -9,14 +9,14 @@
   "test": {
     "username": "postgres",
     "password": "123",
-    "database": "BookManagement_test",
+    "database": "mydb_test",
     "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
     "password": "123",
-    "database": "BookManagement_production",
+    "database": "mydb_production",
     "host": "localhost",
     "dialect": "postgres"
   }
