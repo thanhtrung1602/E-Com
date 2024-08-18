@@ -20,7 +20,7 @@ lerna-debug.log*
 /.nyc_output
 ../config.json
 
-/src/config
+/src/config/config.json
 
 # IDEs and editors
 /.idea
