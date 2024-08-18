@@ -10,6 +10,24 @@ class UserService {
     }
   }
 
+  async getOneUserById(id) {
+    try {
+      const getOneUserById = await db.User.findOne({
+        where: {
+          id,
+        },
+      });
+
+      if (!getOneUserById) {
+        return { error: `không có user nào có id la ${id}` };
+      }
+
+      return getOneUserById;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async updateUser({ phone, email, name, bom, ban }, id) {
     try {
       const checkUser = await db.User.findOne({

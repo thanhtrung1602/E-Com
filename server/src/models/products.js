@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: "id",
         as: "categoryData",
       });
-      Product.belongsTo(models.User, {
+      Product.belongsTo(models.ManuFacturer, {
         foreignKey: "manufacturerId",
         targetKey: "id",
         as: "manufacturerData",

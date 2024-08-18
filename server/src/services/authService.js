@@ -3,8 +3,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { compare, hash } = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const user = require("../models/user");
-const { where } = require("sequelize");
 class AuthService {
   async login(body) {
     try {
@@ -65,6 +63,24 @@ class AuthService {
       }
 
       return register;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async logout(id) {
+    try {
+      const userId = id.userId;
+
+      const logout = await db.RefreshToken.destroy({
+        where: {
+          userId: userId,
+        },
+      });
+
+      if (logout) {
+        return { message: "Logout successful" };
+      }
     } catch (error) {
       throw error;
     }

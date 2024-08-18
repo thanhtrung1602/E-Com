@@ -1,8 +1,6 @@
-import { config } from "~/config";
-import axios, { InternalAxiosRequestConfig } from "axios";
-import dayjs from "dayjs";
-import jwt_decode, { jwtDecode } from "jwt-decode"; // Sử dụng default import
-import useGet from "~/api/get";
+import axios from "axios";
+// import { jwtDecode } from "jwt-decode"; // Correct import
+// import { getAccessToken, getRefreshToken } from "./tokenService";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000",
@@ -21,29 +19,46 @@ instance.interceptors.response.use(
   }
 );
 
-const useAxiosWithAuth = () => {
-  const { data: accessToken } = useGet("/auth/getAccessToken");
-  const { data: refreshToken } = useGet("/auth/getRefreshToken");
+// const checkTokenExpiration = (token: string) => {
+//   const decodedToken = jwtDecode(token);
+//   const currentTime = Date.now() / 1000;
+//   // Check if 'exp' exists and compare
+//   if (decodedToken.exp) {
+//     return decodedToken.exp < currentTime;
+//   }
 
-  instance.interceptors.request.use(async (config) => {
-    const user: jwt_decode.JwtPayload = jwtDecode(accessToken);
-    const isExpired = dayjs.unix(Number(user)).diff(dayjs()) < 1;
-    console.log("isExpired", isExpired);
-    if (!isExpired) return;
+//   // Handle case where 'exp' is undefined
+//   console.error("Token does not have an expiration time");
+//   return true;
+// };
 
-    const response = await axios.post(
-      "http://localhost:3000/auth/refresh",
-      {
-        refreshToken: refreshToken,
-      },
-      { withCredentials: true }
-    );
+// const refreshToken = async () => {
+//   const saveRefreshToken = await getRefreshToken();
+//   try {
+//     const response = await axios.post("http://localhost:3000/auth/refresh", {
+//       refreshToken: saveRefreshToken,
+//     });
+//     const newAccessToken = response.data.accessToken;
+//     console.log("New access token:", newAccessToken);
+//     return newAccessToken;
+//   } catch (error) {
+//     console.error("Failed to refresh token:", error);
+//     throw error;
+//   }
+// };
 
-    config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-  });
-};
+// instance.interceptors.request.use(
+//   async (config) => {
+//     let saveAccessToken = await getAccessToken();
+//     if (saveAccessToken && checkTokenExpiration(saveAccessToken)) {
+//       saveAccessToken = await refreshToken();
+//     }
+//     config.headers["Authorization"] = `Bearer ${saveAccessToken}`;
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
-export default {
-  instance,
-  useAxiosWithAuth,
-};
+export default instance;

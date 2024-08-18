@@ -1,5 +1,6 @@
 const validator = require("validator");
 const AuthService = require("../services/authService");
+const jwt = require("jsonwebtoken");
 class AuthController {
   async login(req, res) {
     const { email, password } = req.body;
@@ -47,8 +48,6 @@ class AuthController {
     const { name, password, email, phone, role } = req.body;
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,10}$/;
     const phoneRegex = /^\d{10}$/;
-    console.log("Password:", password); // In giá trị của password
-    console.log("Password matches regex:", passwordRegex.test(password));
     try {
       if (!name || !password || !email || !phone) {
         return res.status(400).json({
@@ -123,12 +122,20 @@ class AuthController {
     return res.status(200).json(refreshToken);
   }
 
-  logout(req, res) {
+  async logout(req, res) {
     try {
+      const authHeader = req.headers["authorization"];
+      const token = authHeader && authHeader.split(" ")[1];
+      if (!token) {
+        return res.status(401).json({ error: "Access token not provided" });
+      }
+
+      const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
       res.clearCookie("refreshToken", { httpOnly: true, secure: true });
       res.clearCookie("accessToken", { httpOnly: true, secure: true });
 
-      return res.status(200).json({ message: "Logout successful" });
+      const logout = await AuthService.logout(decoded);
+      return res.status(200).json(logout);
     } catch (error) {
       return res
         .status(500)

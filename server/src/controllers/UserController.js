@@ -26,6 +26,17 @@ class UsersController {
     return res.status(200).json(decoded);
   }
 
+  async getOneUserById(req, res) {
+    const id = req.params.id;
+    try {
+      const NumberId = parseInt(id);
+      const getOneUserById = await userService.getOneUserById(NumberId);
+      return res.status(200).json(getOneUserById);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async updateUser(req, res) {
     const id = req.params.id;
     const { phone, email, name, bom, ban } = req.body;
