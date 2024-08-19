@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 // import { jwtDecode } from "jwt-decode"; // Correct import
 // import { getAccessToken, getRefreshToken } from "./tokenService";
@@ -47,14 +48,14 @@ instance.interceptors.response.use(
 //   }
 // };
 
-<<<<<<< HEAD
+
 const autoRefreshToken = async () => {
   const response = await axios.post('http://localhost:3000/auth/refresh', {
     refreshToken: autoRefreshToken // get lại cái refresh token gán vào 
   });
   return response.data.accessToken;
 };
-=======
+
 // instance.interceptors.request.use(
 //   async (config) => {
 //     let saveAccessToken = await getAccessToken();
@@ -68,6 +69,5 @@ const autoRefreshToken = async () => {
 //     return Promise.reject(error);
 //   }
 // );
->>>>>>> Trung
 
 export default instance;

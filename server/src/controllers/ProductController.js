@@ -1,12 +1,6 @@
 const productService = require("../services/productService");
 class ProductController {
-<<<<<<< HEAD
-  getAllProducts() {}
-  async createProduct(req, res) {
-    const file = req.files["img"][0].path;
-=======
   async getAllProducts(req, res) {
->>>>>>> Phu
     try {
       const products = await productService.getAllProducts();
       return res.status(200).json(products);
