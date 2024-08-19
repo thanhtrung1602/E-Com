@@ -16,29 +16,33 @@ instance.interceptors.response.use(
   }
 );
 
-const checkTokenExpiration = (token: string): Boolean => {
-  const decodedToken: jwt_decode.JwtPayload = jwtDecode(token)
-  const currentTime = Date.now() / 1000;
+// const checkTokenExpiration = (token: string) => {
+//   const decodedToken = jwtDecode(token);
+//   const currentTime = Date.now() / 1000;
+//   // Check if 'exp' exists and compare
+//   if (decodedToken.exp) {
+//     return decodedToken.exp < currentTime;
+//   }
 
-  if (decodedToken.exp === undefined) {
-    throw new Error("Token does not contain an expiration field.");
-  }
-  return decodedToken?.exp < currentTime;
-};
+//   // Handle case where 'exp' is undefined
+//   console.error("Token does not have an expiration time");
+//   return true;
+// };
 
-instance.interceptors.request.use(
-  async (config) => {
-    let token = localStorage.getItem('accessToken'); // chỉnh lại cái gán token
-    if (token && checkTokenExpiration(token)) {
-      await autoRefreshToken();
-    }
-    config.headers['Authorization'] = `Bearer ${token}`;
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-)
+// const refreshToken = async () => {
+//   const saveRefreshToken = await getRefreshToken();
+//   try {
+//     const response = await axios.post("http://localhost:3000/auth/refresh", {
+//       refreshToken: saveRefreshToken,
+//     });
+//     const newAccessToken = response.data.accessToken;
+//     console.log("New access token:", newAccessToken);
+//     return newAccessToken;
+//   } catch (error) {
+//     console.error("Failed to refresh token:", error);
+//     throw error;
+//   }
+// };
 
 const autoRefreshToken = async () => {
   const response = await axios.post('http://localhost:3000/auth/refresh', {
@@ -46,5 +50,19 @@ const autoRefreshToken = async () => {
   });
   return response.data.accessToken;
 };
+// instance.interceptors.request.use(
+//   async (config) => {
+//     let saveAccessToken = await getAccessToken();
+//     if (saveAccessToken && checkTokenExpiration(saveAccessToken)) {
+//       saveAccessToken = await refreshToken();
+//     }
+//     config.headers["Authorization"] = `Bearer ${saveAccessToken}`;
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
 
 export default instance;

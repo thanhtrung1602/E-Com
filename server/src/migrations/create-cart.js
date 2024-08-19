@@ -21,6 +21,9 @@ module.exports = {
       total: {
         type: Sequelize.STRING,
       },
+      // operation: {
+      //   type: Sequelize.STRING,
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
