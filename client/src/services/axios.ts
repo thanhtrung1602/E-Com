@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/ban-types */
+=======
+/* eslint-disable @typescript-eslint/no-unused-vars */
+>>>>>>> 01cedbe16edbb15f356f13b89a3f07dffe65bbde
 import axios from "axios";
 import jwt_decode, { jwtDecode } from 'jwt-decode';
 
@@ -44,12 +48,20 @@ instance.interceptors.response.use(
 //   }
 // };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 01cedbe16edbb15f356f13b89a3f07dffe65bbde
 const autoRefreshToken = async () => {
   const response = await axios.post('http://localhost:3000/auth/refresh', {
     refreshToken: autoRefreshToken // get lại cái refresh token gán vào 
   });
   return response.data.accessToken;
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 01cedbe16edbb15f356f13b89a3f07dffe65bbde
 // instance.interceptors.request.use(
 //   async (config) => {
 //     let saveAccessToken = await getAccessToken();
@@ -63,6 +75,9 @@ const autoRefreshToken = async () => {
 //     return Promise.reject(error);
 //   }
 // );
+<<<<<<< HEAD
 
+=======
+>>>>>>> 01cedbe16edbb15f356f13b89a3f07dffe65bbde
 
 export default instance;

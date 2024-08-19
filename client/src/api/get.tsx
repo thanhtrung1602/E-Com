@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import instance from "~/services/axios";
 
