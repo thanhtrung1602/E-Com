@@ -3,10 +3,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { compare, hash } = require("bcrypt");
 const jwt = require("jsonwebtoken");
-<<<<<<< HEAD
-const user = require("../models/user");
-=======
->>>>>>> 35ff99103815c6904dee799e16528bd253b8e9ce
 class AuthService {
   async login(body) {
     try {
@@ -28,11 +24,7 @@ class AuthService {
         userId: user.id,
       };
       const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-<<<<<<< HEAD
-        expiresIn: "30s",
-=======
         expiresIn: "15s",
->>>>>>> 35ff99103815c6904dee799e16528bd253b8e9ce
       });
       const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
         expiresIn: "365d",
@@ -76,38 +68,6 @@ class AuthService {
     }
   }
 
-<<<<<<< HEAD
-  async refresh(refreshToken) {
-    try {
-      jwt.verify(
-        refreshToken,
-        process.env.REFRESH_TOKEN_SECRET,
-        (err, user) => {
-          if (err) {
-            return res.status(401).json({ error: "Invalid refresh token" });
-          }
-        }
-      );
-      const tokenRecord = await db.RefreshToken.findOne({
-        where: {
-          token: refreshToken,
-        },
-      });
-
-      const id = tokenRecord?.dataValues.userId;
-
-      if (!tokenRecord) {
-        return { error: "Invalid refresh token." };
-      }
-
-      const expiresIn = tokenRecord?.dataValues.expiresIn;
-      if (expiresIn <= new Date()) {
-        return { error: "Refresh token has expired." };
-      }
-
-      const newPayload = {
-        userId: id,
-=======
   async logout(id) {
     try {
       const userId = id.userId;
@@ -155,24 +115,17 @@ class AuthService {
 
       const newPayload = {
         userId: tokenRecord.dataValues.userId,
->>>>>>> 35ff99103815c6904dee799e16528bd253b8e9ce
       };
       const newAccessToken = jwt.sign(
         newPayload,
         process.env.ACCESS_TOKEN_SECRET,
         {
-<<<<<<< HEAD
-          expiresIn: expiresIn.toString(),
-=======
           expiresIn: expiresIn,
->>>>>>> 35ff99103815c6904dee799e16528bd253b8e9ce
         }
       );
 
       return newAccessToken;
     } catch (error) {
-<<<<<<< HEAD
-=======
       console.error("Error during token refresh:", error);
       return { error: "Internal server error" };
     }
@@ -210,7 +163,6 @@ class AuthService {
         return { message: "Đổi mật khẩu thành công" };
       }
     } catch (error) {
->>>>>>> 35ff99103815c6904dee799e16528bd253b8e9ce
       throw error;
     }
   }
