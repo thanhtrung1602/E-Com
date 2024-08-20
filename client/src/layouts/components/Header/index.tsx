@@ -1,9 +1,34 @@
+import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaArrowRight, FaTicket } from "react-icons/fa6";
 import { MdOutlineShoppingCart, MdPersonOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 import logo from "~/assets/images/logo.png";
 function Header() {
+
+    const [menuActive, setMenuActive] = useState(() => {
+        // Lấy giá trị từ sessionStorage nếu có, nếu không thì mặc định là "home"
+        return sessionStorage.getItem("menuActive") || "home";
+    });
+
+    const handleMenu = (id: string) => {
+        setMenuActive(id);
+        // Lưu trạng thái vào sessionStorage
+        sessionStorage.setItem("menuActive", id);
+    };
+
+    useEffect(() => {
+        // Cập nhật trạng thái từ sessionStorage khi component mount
+        const savedMenu = sessionStorage.getItem("menuActive");
+        if (savedMenu) {
+            setMenuActive(savedMenu);
+        }
+    }, []);
+
+    const getClassName = (id: string) => {
+        return `text-black font-semibold ${menuActive === id ? "relative before:absolute before:w-full before:h-[1px] before:-bottom-1 before:bg-black before:transition-all before:duration-500" : ""}`
+    }
+
     return (
         <header>
             <div className="bg-main600 flex justify-center items-center">
@@ -23,10 +48,38 @@ function Header() {
                 </div>
                 <div className="">
                     <ul className="flex items-center gap-x-12">
-                        <li className="text-black font-semibold relative before:absolute before:w-full before:h-[0.5px] before:bottom-0 before:bg-black"><Link to={"/"}>Home</Link></li>
-                        <li className="text-black font-semibold"><Link to={"/shop"}>Shop</Link></li>
-                        <li className="text-black font-semibold"><Link to={"/contact"}>Contact</Link></li>
-                        <li className="text-black font-semibold"><Link to={"/blog"}>Blog</Link></li>
+                        <li className={getClassName("home")}>
+                            <Link
+                                to={"/"}
+                                onClick={() => handleMenu('home')}
+                            >
+                                Home
+                            </Link>
+                        </li>
+                        <li className={getClassName("shop")}>
+                            <Link
+                                to={"/shop"}
+                                onClick={() => handleMenu('shop')}
+                            >
+                                Shop
+                            </Link>
+                        </li>
+                        <li className={getClassName("contact")}>
+                            <Link
+                                to={"/contact"}
+                                onClick={() => handleMenu('contact')}
+                            >
+                                Contact
+                            </Link>
+                        </li>
+                        <li className={getClassName("blog")}>
+                            <Link
+                                to={"/blog"}
+                                onClick={() => handleMenu('blog')}
+                            >
+                                Blog
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="flex justify-center items-center gap-x-6">
